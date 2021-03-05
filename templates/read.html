@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://andybrewer.github.io/mvp/mvp.css" rel="stylesheet"></link>
+</head>
+
+<body>
+    <header>
+        <h1><a href="/">Reddit Reader</a></h1>
+        <h3>Reading:
+            {%for key in reddits_key%}
+                <span>r/{{key}}</span>
+            {%endfor%}
+        </h3>
+    </header>
+    <main>
+        {%for key in reddits_key%}
+        {%for post in db_reddits[key]['posts']%}
+        <div>
+            <div>
+                <a href="{{post.link}}" target="_blank">
+                    <h3>{{post.title}}</h3>
+                </a>
+            </div>
+            <div>
+                <strong>
+                    {%if post.votes == 'Vote'%}
+                        Vote | r/{{key}}
+                    {%else%}
+                        {{post.votes}} upvotes | r/{{key}}
+                    {%endif%}
+                </strong>
+                 
+            </div>
+            
+        </div>
+        <hr />
+        {%endfor%}
+    {%endfor%}
+    </main>
+    
+</body>
+
+</html>
